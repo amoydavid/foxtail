@@ -1,6 +1,10 @@
-name: "gin-blog"
+name: "foxtail"
+
 port: 8022
 logsAddress: "./logs/"
+
+sqlite:
+ path: "./storage/foxtail.db"
 
 mysql:
  name: "root"

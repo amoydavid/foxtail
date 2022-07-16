@@ -1,2 +1,6 @@
-tmp/*
-logs/*
+tmp
+logs
+storage
+./foxtail
+.idea
+.vscode

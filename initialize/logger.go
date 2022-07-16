@@ -2,9 +2,9 @@ package initialize
 
 import (
 	"fmt"
-	"gblog/global"
+	"foxtail/global"
 
-	"gblog/utils"
+	"foxtail/utils"
 
 	"go.uber.org/zap"
 )
@@ -21,6 +21,7 @@ func InitLogger() {
 	}
 	// 创建logger实例
 	logg, _ := cfg.Build()
+
 	zap.ReplaceGlobals(logg) // 替换zap包中全局的logger实例，后续在其他包中只需使用zap.L()调用即可
 	global.Lg = logg         // 注册到全局变量中
 }

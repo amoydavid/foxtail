@@ -1,11 +1,25 @@
 package middlewares
 
 import (
+	uuid "github.com/satori/go.uuid"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
+
+func AddTraceId() gin.HandlerFunc {
+	return func(g *gin.Context) {
+		traceId := g.GetHeader("traceId")
+		if traceId == "" {
+			traceId = uuid.NewV4().String()
+			g.Set("traceId", traceId)
+		}
+		g.Request = g.Request.WithContext(g)
+		//log.Info("AddTraceId success")
+		g.Next()
+	}
+}
 
 // GinLogger 接收gin框架默认的日志
 func GinLogger() gin.HandlerFunc {
@@ -22,6 +36,7 @@ func GinLogger() gin.HandlerFunc {
 		if c.Writer.Status() != 200 {
 			// 记录异常信息
 			zap.L().Info(path,
+				zap.String("traceId", c.GetString("traceId")),
 				zap.Int("status", c.Writer.Status()),
 				zap.String("method", c.Request.Method),
 				zap.String("path", path),

@@ -1,8 +1,8 @@
 package initialize
 
 import (
-	"gblog/config"
-	"gblog/global"
+	"foxtail/config"
+	"foxtail/global"
 
 	"github.com/fatih/color"
 	"github.com/spf13/viper"

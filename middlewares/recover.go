@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"gblog/global"
+	"foxtail/global"
 	"net"
 	"net/http"
 	"net/http/httputil"

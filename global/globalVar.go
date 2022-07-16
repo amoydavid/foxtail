@@ -1,7 +1,8 @@
 package global
 
 import (
-	"gblog/config"
+	"foxtail/config"
+	"gorm.io/gorm"
 
 	"go.uber.org/zap"
 )
@@ -9,4 +10,5 @@ import (
 var (
 	Settings config.ServerConfig
 	Lg       *zap.Logger
+	DB       *gorm.DB
 )

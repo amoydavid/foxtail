@@ -1,11 +1,16 @@
 package config
 
 type ServerConfig struct {
-	Name        string      `mapstructure:"name"`
-	Port        int         `mapstructure:"port"`
-	Mysqlinfo   MysqlConfig `mapstructure:"mysql"`
-	RedisInfo   RedisConfig `mapstructure:"redis"`
-	LogsAddress string      `mapstructure:"logsAddress"`
+	Name        string       `mapstructure:"name"`
+	Port        int          `mapstructure:"port"`
+	Mysqlinfo   MysqlConfig  `mapstructure:"mysql"`
+	RedisInfo   RedisConfig  `mapstructure:"redis"`
+	LogsAddress string       `mapstructure:"logsAddress"`
+	Sqliteinfo  SqliteConfig `mapstructure:"sqlite"`
+}
+
+type SqliteConfig struct {
+	Path string `mapstructure:"path"`
 }
 
 type MysqlConfig struct {

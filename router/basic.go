@@ -2,8 +2,9 @@ package router
 
 import (
 	//"app/http/controller"
-	"gblog/app/http/controller"
-	"gblog/middlewares"
+	"foxtail/app/http/controller"
+	"foxtail/middlewares"
+	"foxtail/response"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -16,7 +17,12 @@ func SetupRouter() *gin.Engine {
 	// gin.DisableConsoleColor()
 	r := gin.Default()
 
-	r.Use(middlewares.GinLogger(), middlewares.GinRecovery(true))
+	r.Use(middlewares.AddTraceId(), middlewares.GinLogger(), middlewares.GinRecovery(true))
+
+	r.GET("/", func(c *gin.Context) {
+		//c.String(http.StatusOK, "hello world")
+		response.Success(c, http.StatusOK, gin.H{"user": "hello", "status": "no value"})
+	})
 
 	// Ping test
 	r.GET("/ping", func(c *gin.Context) {
@@ -24,7 +30,7 @@ func SetupRouter() *gin.Engine {
 	})
 
 	// 路由分组
-	ApiGroup := r.Group("/v1/")
+	ApiGroup := r.Group("/api/")
 	UserRouter(ApiGroup)
 
 	// // Get user value
