@@ -21,10 +21,14 @@ type User struct {
 	Projects []*Project `gorm:"many2many:user_projects;"`
 }
 
-func (u *User) LoginToken(device string) (string, error) {
+func (u *User) LoginToken(device string, dropOther bool) (string, error) {
 	if u.ID > 0 {
 
 		var sum, id string
+
+		if dropOther {
+			global.DB.Where("user_id = ?", u.ID).Delete(&PersonalAccessToken{})
+		}
 
 		for {
 			id, _ = gonanoid.New()

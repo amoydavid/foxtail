@@ -14,6 +14,7 @@ import (
 )
 
 // 类似于 Laravel 中的身份验证，token经Sha256后存于personal_access_token表
+// header里放 Authorization: Bearer 1234567
 func Sanctum() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token, err := getBearerTokenFromHeader(c.GetHeader("Authorization"))

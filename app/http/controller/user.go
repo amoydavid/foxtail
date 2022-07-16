@@ -37,7 +37,7 @@ func PasswordLogin(c *gin.Context) {
 		return
 	}
 
-	token, err := user.LoginToken("PC")
+	token, err := user.LoginToken("PC", true)
 
 	if err == nil && len(token) > 0 {
 		response.Success(c, http.StatusOK, gin.H{
