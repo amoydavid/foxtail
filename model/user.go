@@ -27,13 +27,13 @@ func (u *User) LoginToken(device string) (string, error) {
 		var sum, id string
 
 		for {
-			id, _ := gonanoid.New()
-			sum := fmt.Sprintf("%x", sha256.Sum256([]byte(id)))
+			id, _ = gonanoid.New()
+			sum = fmt.Sprintf("%x", sha256.Sum256([]byte(id)))
 
 			var existsToken PersonalAccessToken
 
 			result := global.DB.Where("token = ?", sum).First(&existsToken)
-			if !errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 				break
 			}
 		}
@@ -43,7 +43,7 @@ func (u *User) LoginToken(device string) (string, error) {
 			Token:  sum,
 			UserId: int(u.ID),
 			ExpiredAt: sql.NullTime{
-				Time:  time.Now(),
+				Time:  time.Now().Add(time.Hour * 24 * 14),
 				Valid: true,
 			},
 			Ability: datatypes.JSON(`["*"]`),

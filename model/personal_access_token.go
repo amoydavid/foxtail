@@ -2,6 +2,7 @@ package model
 
 import (
 	"database/sql"
+
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
@@ -14,4 +15,5 @@ type PersonalAccessToken struct {
 	ExpiredAt  sql.NullTime
 	LastUsedAt sql.NullTime
 	Ability    datatypes.JSON `gorm:"serializer:json"`
+	User       User           `gorm:"foreignKey:UserId"`
 }
