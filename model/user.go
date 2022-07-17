@@ -14,11 +14,11 @@ import (
 )
 
 type User struct {
-	gorm.Model
-	Username string     `gorm:"varchar(100);index;unique;not null;"`
-	Email    string     `gorm:"varchar(100);index;unique;not null;"`
-	Password string     `gorm:"varchar(120);not null;"`
-	Projects []*Project `gorm:"many2many:user_projects;"`
+	BaseModel
+	Username string     `gorm:"varchar(100);index;unique;not null;" json:"username"`
+	Email    string     `gorm:"varchar(100);index;unique;not null;" json:"email"`
+	Password string     `gorm:"varchar(120);not null;" json:"-"`
+	Projects []*Project `gorm:"many2many:user_projects;" json:"-"`
 }
 
 func (u *User) LoginToken(device string, dropOther bool) (string, error) {

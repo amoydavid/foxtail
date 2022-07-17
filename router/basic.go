@@ -1,8 +1,6 @@
 package router
 
 import (
-	//"app/http/controller"
-	"foxtail/app/http/controller"
 	"foxtail/middlewares"
 	"foxtail/response"
 	"net/http"
@@ -49,7 +47,7 @@ func SetupRouter() *gin.Engine {
 	// 	c.String(http.StatusOK, "%t", b)
 	// })
 
-	r.GET("/posts", controller.ArticleList)
+	//r.GET("/posts", controller.ArticleList)
 
 	// Authorized group (uses gin.BasicAuth() middleware)
 	// Same than:
